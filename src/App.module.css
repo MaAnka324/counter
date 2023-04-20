@@ -1,0 +1,60 @@
+body{
+    background-color: #323334;
+}
+
+span {
+    font-size: 15px;
+}
+
+input {
+    width: 120px;
+}
+
+.block {
+    display: block;
+    margin: 0 auto;
+    background-color: #323334;
+    width: 250px;
+    border-radius: 10px;
+    border: 3px solid #70E4FB;
+    margin-top: 50px;
+
+}
+
+.number {
+    display: flex;
+    justify-content: center;
+    color: black;
+    font-size: 50px;
+    background-color: #70E4FB;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.number5 {
+    color: red;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    border: 3px solid #70E4FB;
+    margin: 10px;
+    border-radius: 5px;
+    padding: 7px;
+
+}
+
+
+.incButton {
+    background-color: #70E4FB;
+    border: 0;
+    border-radius: 3px;
+    margin: 5px;
+    width: 40px;
+    height: 20px;
+
+}
+
+
+
