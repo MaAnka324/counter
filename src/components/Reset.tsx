@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from "../App.module.css";
 
 import Button from "./Button";
@@ -6,12 +6,25 @@ import Settings from "./Set";
 
 const Reset = () => {
 
-    let [start, setStart] = useState<any>(3)
-    let [max, setMax] = useState<any>(5)
-    let [displayValue, setDisplayValue] = useState<any>(0)
-    let [disableSet, setDisableSet] = useState<boolean>(false)
+    let [start, setStart] = useState<any>(JSON.parse(localStorage.getItem('startValue') ?? '0'))
+    let [max, setMax] = useState<any>(JSON.parse(localStorage.getItem('maxValue') ?? '5'))
+    let [displayValue, setDisplayValue] = useState<any>( JSON.parse(localStorage.getItem('counterValue') ?? '0'))//localStorage.getItem('counterValue') ? localStorage.getItem('counterValue'): '0'
+    let [disableSet, setDisableSet] = useState<boolean>(true)
     let [disableInc, setDisableInc] = useState<boolean>(false)
     let [disableReset, setDisableReset] = useState<boolean>(false)
+
+
+    useEffect( () => {
+        localStorage.setItem('counterValue', JSON.stringify(displayValue))
+    }, [displayValue] )
+
+    useEffect( () => {
+        localStorage.setItem('startValue', JSON.stringify(start))
+    }, [start] )
+
+    useEffect( () => {
+        localStorage.setItem('maxValue', JSON.stringify(max))
+    }, [max] )
 
     const startDisable = (e: ChangeEvent<HTMLInputElement>) => {
         handleStartValue(+e.currentTarget.value)
