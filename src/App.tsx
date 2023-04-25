@@ -3,9 +3,6 @@ import Reset from "./components/Reset";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Settings from "./components/Set";
 
-
-
-
 function App() {
 
     let [start, setStart] = useState<any>(JSON.parse(localStorage.getItem('startValue') ?? '0'))
