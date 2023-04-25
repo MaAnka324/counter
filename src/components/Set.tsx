@@ -2,6 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from "../App.module.css";
 import Button from "./Button";
 
+
 type SettingsType = {
     start: number
     max: number
@@ -28,7 +29,6 @@ const Settings = (props: SettingsType) => {
                 <input value={props.start} type={"number"} onChange={props.onChangeStartDis}/>
             </div>
             <div className={s.buttons}>
-                {/*<button className={s.incButton} disabled={props.disabled} onClick={props.handlerDisplayValue}>set</button>*/}
                 <Button onClick={props.handlerDisplayValue} disabled={props.disabled} buttonName={'set'}/>
             </div>
         </div>
