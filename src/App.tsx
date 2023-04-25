@@ -8,7 +8,7 @@ function App() {
     let [start, setStart] = useState<any>(JSON.parse(localStorage.getItem('startValue') ?? '0'))
     let [max, setMax] = useState<any>(JSON.parse(localStorage.getItem('maxValue') ?? '5'))
     let [displayValue, setDisplayValue] = useState<any>( JSON.parse(localStorage.getItem('counterValue') ?? '0'))//localStorage.getItem('counterValue') ? localStorage.getItem('counterValue'): '0'
-    let [disableSet, setDisableSet] = useState<boolean>(true)
+    let [disableSet, setDisableSet] = useState<boolean>(false)
     let [disableInc, setDisableInc] = useState<boolean>(false)
     let [disableReset, setDisableReset] = useState<boolean>(false)
 
@@ -70,7 +70,7 @@ function App() {
 
     const handlerDisplayValue = () => {
         setDisplayValue(start)
-        setDisableSet(true)
+        // setDisableSet(true)
         setDisableInc(false)
         setDisableReset(false)
     }
@@ -88,25 +88,7 @@ function App() {
 
   return (
       <BrowserRouter>
-          <Settings
-              max={max}
-              start={start}
-              handleStartValue={handleStartValue}
-              handleMaxValue={handleMaxValue}
-              handlerDisplayValue={handlerDisplayValue}
-              onChangeStartDis={startDisable}
-              onChangeMaxDis={maxDisable}
-              disabled={disableSet}
-          />
-          <Reset
-              displayValue={displayValue}
-              onClickHandler={onClickHandler}
-              onClickHandler0={onClickHandler0}
-              disableInc={disableInc}
-              disableReset={disableReset}
-              max={max}
-          />
-          {/*<Route path={'/settings'} render={() => <Settings*/}
+          {/*<Settings*/}
           {/*    max={max}*/}
           {/*    start={start}*/}
           {/*    handleStartValue={handleStartValue}*/}
@@ -115,15 +97,35 @@ function App() {
           {/*    onChangeStartDis={startDisable}*/}
           {/*    onChangeMaxDis={maxDisable}*/}
           {/*    disabled={disableSet}*/}
-          {/*/>}/>*/}
-        {/*  <Route path={'/reset'} render={() => <Reset*/}
-        {/*    displayValue={displayValue}*/}
-        {/*    onClickHandler={onClickHandler}*/}
-        {/*    onClickHandler0={onClickHandler0}*/}
-        {/*    disableInc={disableInc}*/}
-        {/*    disableReset={disableReset}*/}
-        {/*    max={max}*/}
-        {/*/>}/>*/}
+          {/*/>*/}
+          {/*<Reset*/}
+          {/*    displayValue={displayValue}*/}
+          {/*    onClickHandler={onClickHandler}*/}
+          {/*    onClickHandler0={onClickHandler0}*/}
+          {/*    disableInc={disableInc}*/}
+          {/*    disableReset={disableReset}*/}
+          {/*    max={max}*/}
+          {/*/>*/}
+        <Routes>
+            <Route path={'/*'} element={<Settings
+                max={max}
+                start={start}
+                handleStartValue={handleStartValue}
+                handleMaxValue={handleMaxValue}
+                handlerDisplayValue={handlerDisplayValue}
+                onChangeStartDis={startDisable}
+                onChangeMaxDis={maxDisable}
+                disabled={disableSet}
+            />}/>
+            <Route path={'/reset'} element={ <Reset
+                displayValue={displayValue}
+                onClickHandler={onClickHandler}
+                onClickHandler0={onClickHandler0}
+                disableInc={disableInc}
+                disableReset={disableReset}
+                max={max}
+            />}/>
+        </Routes>
       </BrowserRouter>
   )
 }
