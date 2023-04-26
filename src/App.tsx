@@ -29,6 +29,7 @@ function App() {
         setDisableInc(true)
         setDisableReset(true)
     }
+
     const maxDisable = (e: ChangeEvent<HTMLInputElement>) => {
         handleMaxValue(+e.currentTarget.value)
         setDisableInc(true)
@@ -52,6 +53,7 @@ function App() {
             return  setDisplayValue('Click set')
         }
     }
+
     const handleMaxValue = (newMaxValue: number) => {
         setMax(newMaxValue)
         setDisableSet(false)
@@ -88,24 +90,6 @@ function App() {
 
   return (
       <BrowserRouter>
-          {/*<Settings*/}
-          {/*    max={max}*/}
-          {/*    start={start}*/}
-          {/*    handleStartValue={handleStartValue}*/}
-          {/*    handleMaxValue={handleMaxValue}*/}
-          {/*    handlerDisplayValue={handlerDisplayValue}*/}
-          {/*    onChangeStartDis={startDisable}*/}
-          {/*    onChangeMaxDis={maxDisable}*/}
-          {/*    disabled={disableSet}*/}
-          {/*/>*/}
-          {/*<Reset*/}
-          {/*    displayValue={displayValue}*/}
-          {/*    onClickHandler={onClickHandler}*/}
-          {/*    onClickHandler0={onClickHandler0}*/}
-          {/*    disableInc={disableInc}*/}
-          {/*    disableReset={disableReset}*/}
-          {/*    max={max}*/}
-          {/*/>*/}
         <Routes>
             <Route path={'/*'} element={<Settings
                 max={max}

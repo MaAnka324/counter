@@ -5,7 +5,6 @@ type Button = {
     onClick: () => void
     disabled: boolean
     buttonName: string
-
 }
 
 const Button = (props: Button) => {
