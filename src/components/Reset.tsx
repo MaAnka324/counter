@@ -2,6 +2,7 @@ import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from "../App.module.css";
 import Button from "./Button";
 import Settings from "./Set";
+import {NavLink} from "react-router-dom";
 
 type ResetType = {
     displayValue: string
@@ -118,7 +119,8 @@ const Reset = (props: ResetType) => {
                 <div className={s.buttons}>
                     <Button onClick={props.onClickHandler} disabled={props.disableInc} buttonName={'inc'}/>
                     <Button onClick={props.onClickHandler0} disabled={props.disableReset} buttonName={'reset'}/>
-                    <Button onClick={()=> {} } disabled={false} buttonName={'set'}/>
+                    <NavLink to='/*'><Button onClick={()=> {} } disabled={false} buttonName={'set'}/></NavLink>
+
                 </div>
             </div>
         </div>

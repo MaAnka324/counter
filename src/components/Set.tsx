@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import s from "../App.module.css";
 import Button from "./Button";
+import {NavLink} from "react-router-dom";
 
 
 type SettingsType = {
@@ -29,7 +30,8 @@ const Settings = (props: SettingsType) => {
                 <input value={props.start} type={"number"} onChange={props.onChangeStartDis}/>
             </div>
             <div className={s.buttons}>
-                <Button onClick={props.handlerDisplayValue} disabled={props.disabled} buttonName={'set'}/>
+                <NavLink to='/reset' ><Button onClick={props.handlerDisplayValue} disabled={props.disabled} buttonName={'set'}/></NavLink>
+
             </div>
         </div>
     );
