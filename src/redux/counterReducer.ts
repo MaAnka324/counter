@@ -19,14 +19,14 @@ const initialState: CounterState = {
     maxValue: 3
 }
 
-
 export const counterSlice = createSlice({
     name: 'counter',
     // `createSlice` will infer the state type from the `initialState` argument
     initialState,
     reducers: {
-        start: (state, action) => {
+        start: (state, action: PayloadAction<number>) => {
             state.startValue = action.payload
+
 
             state.disableSet = state.startValue < 0
 
@@ -34,12 +34,12 @@ export const counterSlice = createSlice({
                 state.disableSet = true
             }
         },
-        max: (state, action) => {
+        max: (state, action: PayloadAction<number>) => {
             state.maxValue = action.payload
-            state.disableSet = false
 
             // if (state.maxValue < 0) {
             //     state.disableSet = true
+            //
             // }
             state.disableSet = state.maxValue < 0;
 
@@ -60,15 +60,11 @@ export const counterSlice = createSlice({
         increment0: (state) => {
             state.value = state.startValue
             state.disableInc = false
-        },
-        // Use the PayloadAction type to declare the contents of `action.payload`
-        incrementByAmount: (state, action: PayloadAction<number>) => {
-            state.value += action.payload
-        },
+        }
     },
 })
 
-export const {start, max, set, increment, increment0, incrementByAmount} = counterSlice.actions
+export const { start, max, set, increment, increment0 } = counterSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 
