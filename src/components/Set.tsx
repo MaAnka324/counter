@@ -2,38 +2,52 @@ import React, {ChangeEvent} from 'react';
 import s from "../App.module.css";
 import Button from "./Button";
 import {NavLink} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../redux/hooks/hooks";
+import {max, set, start} from "../redux/counterReducer";
 
 
-type SettingsType = {
-    start: number
-    max: number
-    handleStartValue:(newStartValue:number)=>void
-    handleMaxValue:(newMaxValue:number)=>void
-    handlerDisplayValue:()=>void
-    onChangeStartDis: (e: ChangeEvent<HTMLInputElement>) => void
-    onChangeMaxDis: (e: ChangeEvent<HTMLInputElement>) => void
-    disabled: boolean
-}
+const Settings = () => {
 
-const Settings = (props: SettingsType) => {
+    const startValue = useAppSelector<number>(state => state.counter.startValue)
+
+    const maxValue = useAppSelector<number>(state => state.counter.maxValue)
+
+    const disableSet = useAppSelector<boolean>(state => state.counter.disableSet)
+
+    const dispatch = useAppDispatch()
+    const handlerDisplayValue = () => {
+        dispatch(set())
+    }
+
+    const startDisable = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(start(+e.currentTarget.value))
+    }
+
+    const maxDisable = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(max(+e.currentTarget.value))
+    }
+
 
     const finalClassName = `${s.number}`
-    const inputMax = props.max <= props.start ? `${s.inputRed}` : ''
-    const inputStart = props.start < 0 ? `${s.inputRed}` : props.max <= props.start ? `${s.inputRed}` : ''
+    const inputMax = maxValue <= startValue ? `${s.inputRed}` : ''
+    const inputStart = startValue < 0 ? `${s.inputRed}` : maxValue <= startValue ? `${s.inputRed}` : ''
 
     return (
         <div className={s.block}>
             <div className={finalClassName}>
                 <span>max value</span>
-                <input className={inputMax} value={props.max} type={"number"} onChange={props.onChangeMaxDis} />
+                <input className={inputMax}
+                       value={maxValue}
+                       type="number"
+                       onChange={maxDisable}
+                />
             </div>
             <div className={finalClassName}>
                 <span>start value</span>
-                <input className={inputStart} value={props.start} type={"number"} onChange={props.onChangeStartDis}/>
+                <input className={inputStart} value={startValue} type={"number"} onChange={startDisable}/>
             </div>
             <div className={s.buttons}>
-                <NavLink to='/reset' ><Button onClick={props.handlerDisplayValue} disabled={props.disabled} buttonName={'set'}/></NavLink>
-
+                <NavLink to='/reset' ><Button onClick={handlerDisplayValue} disabled={disableSet} buttonName={'set'}/></NavLink>
             </div>
         </div>
     );
