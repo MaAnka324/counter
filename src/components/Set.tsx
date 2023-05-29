@@ -18,16 +18,18 @@ type SettingsType = {
 const Settings = (props: SettingsType) => {
 
     const finalClassName = `${s.number}`
+    const inputMax = props.max <= props.start ? `${s.inputRed}` : ''
+    const inputStart = props.start < 0 ? `${s.inputRed}` : props.max <= props.start ? `${s.inputRed}` : ''
 
     return (
         <div className={s.block}>
             <div className={finalClassName}>
                 <span>max value</span>
-                <input value={props.max} type={"number"} onChange={props.onChangeMaxDis} />
+                <input className={inputMax} value={props.max} type={"number"} onChange={props.onChangeMaxDis} />
             </div>
             <div className={finalClassName}>
                 <span>start value</span>
-                <input value={props.start} type={"number"} onChange={props.onChangeStartDis}/>
+                <input className={inputStart} value={props.start} type={"number"} onChange={props.onChangeStartDis}/>
             </div>
             <div className={s.buttons}>
                 <NavLink to='/reset' ><Button onClick={props.handlerDisplayValue} disabled={props.disabled} buttonName={'set'}/></NavLink>
