@@ -1,11 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit'
+import {configureStore} from '@reduxjs/toolkit'
 import counterReducer from "./counterReducer";
-// ...
+
 
 export const store = configureStore({
     reducer: {
       counter: counterReducer
     },
+    // middleware: getDefaultMiddleware =>
+    //     getDefaultMiddleware({
+    //         thunk: {
+    //             extraArgument: myCustomApiService
+    //         }
+    //     })
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -1,10 +1,11 @@
 import s from "../App.module.css";
 import Button from "./Button";
-import {NavLink} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../redux/hooks/hooks";
 import {increment, reset} from "../redux/counterReducer";
 
 const Reset = () => {
+    const navigate = useNavigate();
 
     const value = useAppSelector<number>(state => state.counter.value)
 
@@ -24,6 +25,8 @@ const Reset = () => {
     const finalClassName = `${s.number}
     ${value === maxValue ? s.number5 : value.toString() === 'Incorrect value' ? s.number5 : s.number}`
 
+    const onNavigateSettingsClick = ()=> navigate('/')
+
     return (
         <div>
             <div className={s.block}>
@@ -33,7 +36,7 @@ const Reset = () => {
                 <div className={s.buttons}>
                     <Button onClick={onClickHandler} disabled={disableInc} buttonName={'inc'}/>
                     <Button onClick={onClickHandler0} buttonName={'reset'}/>
-                    <NavLink to='/*'><Button onClick={()=> {} } buttonName={'set'}/></NavLink>
+                    <Button onClick={onNavigateSettingsClick} buttonName={'set'}/>
                 </div>
             </div>
         </div>
