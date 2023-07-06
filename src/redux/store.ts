@@ -1,20 +1,21 @@
-import {configureStore} from '@reduxjs/toolkit'
+import {AnyAction, configureStore} from '@reduxjs/toolkit';
 import counterReducer from "./counterReducer";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
 
 
 export const store = configureStore({
     reducer: {
       counter: counterReducer
-    },
-    // middleware: getDefaultMiddleware =>
-    //     getDefaultMiddleware({
-    //         thunk: {
-    //             extraArgument: myCustomApiService
-    //         }
-    //     })
+    }
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+// export type AppDispatch = typeof store.dispatch
+
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AnyAction>
+export type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>
+
+// @ts-ignore
+window.store = store

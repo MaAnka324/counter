@@ -1,5 +1,6 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createSlice, Dispatch} from '@reduxjs/toolkit'
 import type {PayloadAction} from '@reduxjs/toolkit'
+import {RootState} from "./store";
 
 interface CounterState {
     value: number
@@ -7,6 +8,7 @@ interface CounterState {
     disableSet: boolean
     startValue: number
     maxValue: number
+    setValueLC: number
 }
 
 const initialState: CounterState = {
@@ -14,7 +16,8 @@ const initialState: CounterState = {
     disableInc: false,
     disableSet: false,
     startValue: 0,
-    maxValue: 3
+    maxValue: 3,
+    setValueLC: 0
 }
 
 export const counterSlice = createSlice({
@@ -52,10 +55,35 @@ export const counterSlice = createSlice({
         reset: (state) => {
             state.value = state.startValue
             state.disableInc = false
+        },
+        setValueLC: (state, action: PayloadAction<number>) => {
+            state.value = action.payload
         }
     },
 })
 
-export const { start, max, set, increment, reset } = counterSlice.actions
+export const { start, max, set, increment, reset, setValueLC } = counterSlice.actions
 
 export default counterSlice.reducer
+
+
+
+export const incValuesTC = () => (dispatch: Dispatch, getState: () => RootState) => {
+
+    let currentValue = getState().counter.value
+
+    localStorage.setItem('counterValue', JSON.stringify(currentValue + 1))
+    dispatch(increment())
+}
+
+export const setValueFromLocalStorageTC = () => (dispatch: Dispatch) => {
+    let valueAsString = localStorage.getItem('counterValue')
+    if(valueAsString) {
+        let newValue = JSON.parse(valueAsString)
+        dispatch(setValueLC(newValue))
+    }
+
+}
+
+
+

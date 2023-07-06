@@ -2,7 +2,8 @@ import s from "../App.module.css";
 import Button from "./Button";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../redux/hooks/hooks";
-import {increment, reset} from "../redux/counterReducer";
+import {increment, incValuesTC, reset, setValueFromLocalStorageTC, setValueLC} from "../redux/counterReducer";
+import {useEffect} from "react";
 
 const Reset = () => {
     const navigate = useNavigate();
@@ -14,8 +15,13 @@ const Reset = () => {
     const maxValue = useAppSelector<number>(state => state.counter.maxValue)
 
     const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(setValueFromLocalStorageTC())
+    }, [])
+
     const onClickHandler = () => {
-        dispatch(increment())
+        dispatch(incValuesTC())
     }
 
     const onClickHandler0 = () => {
