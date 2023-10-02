@@ -4,7 +4,7 @@ import s from "../App.module.css";
 type ButtonPropsType = {
     onClick?: () => void
     disabled?: boolean
-    classname?:string
+    classname?: string
     buttonName: string
 }
 

@@ -2,7 +2,7 @@ import s from "../App.module.css";
 import Button from "./Button";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../redux/hooks/hooks";
-import {increment, incValuesTC, reset, setValueFromLocalStorageTC, setValueLC} from "../redux/counterReducer";
+import {incValuesTC, reset, setValueFromLocalStorageTC} from "../redux/counterReducer";
 import {useEffect} from "react";
 
 const Reset = () => {
@@ -20,6 +20,8 @@ const Reset = () => {
         dispatch(setValueFromLocalStorageTC())
     }, [])
 
+
+
     const onClickHandler = () => {
         dispatch(incValuesTC())
     }
@@ -31,7 +33,7 @@ const Reset = () => {
     const finalClassName = `${s.number}
     ${value === maxValue ? s.number5 : value.toString() === 'Incorrect value' ? s.number5 : s.number}`
 
-    const onNavigateSettingsClick = ()=> navigate('/')
+    // const onNavigateSettingsClick = () => navigate('/')
 
     return (
         <div>
@@ -42,7 +44,7 @@ const Reset = () => {
                 <div className={s.buttons}>
                     <Button onClick={onClickHandler} disabled={disableInc} buttonName={'inc'}/>
                     <Button onClick={onClickHandler0} buttonName={'reset'}/>
-                    <Button onClick={onNavigateSettingsClick} buttonName={'set'}/>
+                    {/*<Button onClick={onNavigateSettingsClick} buttonName={'set'}/>*/}
                 </div>
             </div>
         </div>

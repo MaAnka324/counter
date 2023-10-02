@@ -1,9 +1,8 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useEffect} from 'react';
 import s from "../App.module.css";
 import Button from "./Button";
-import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../redux/hooks/hooks";
-import {max, set, start} from "../redux/counterReducer";
+import {max, settingsValueFromLocalStorageTC, settingsValuesTC, start} from "../redux/counterReducer";
 
 
 const Settings = () => {
@@ -15,8 +14,14 @@ const Settings = () => {
     const disableSet = useAppSelector<boolean>(state => state.counter.disableSet)
 
     const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(settingsValueFromLocalStorageTC())
+    }, [])
+
     const handlerDisplayValue = () => {
-        dispatch(set())
+        // dispatch(set())
+        dispatch(settingsValuesTC())
     }
 
     const startDisable = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +52,8 @@ const Settings = () => {
                 <input className={inputStart} value={startValue} type={"number"} onChange={startDisable}/>
             </div>
             <div className={s.buttons}>
-                <NavLink to='/reset' ><Button onClick={handlerDisplayValue} disabled={disableSet} buttonName={'set'}/></NavLink>
+                {/*<NavLink to='/reset' ><Button onClick={handlerDisplayValue} disabled={disableSet} buttonName={'set'}/></NavLink>*/}
+                <Button onClick={handlerDisplayValue} disabled={disableSet} buttonName={'set'}/>
             </div>
         </div>
     );

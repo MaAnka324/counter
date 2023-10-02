@@ -8,16 +8,16 @@ interface CounterState {
     disableSet: boolean
     startValue: number
     maxValue: number
-    setValueLC: number
+    setValueLS: number
 }
 
 const initialState: CounterState = {
     value: 0,
-    disableInc: false,
+    disableInc: true,
     disableSet: false,
     startValue: 0,
     maxValue: 3,
-    setValueLC: 0
+    setValueLS: 0
 }
 
 export const counterSlice = createSlice({
@@ -56,16 +56,15 @@ export const counterSlice = createSlice({
             state.value = state.startValue
             state.disableInc = false
         },
-        setValueLC: (state, action: PayloadAction<number>) => {
+        setValueLS: (state, action: PayloadAction<number>) => {
             state.value = action.payload
-        }
+        },
     },
 })
 
-export const { start, max, set, increment, reset, setValueLC } = counterSlice.actions
+export const {start, max, set, increment, reset, setValueLS} = counterSlice.actions
 
 export default counterSlice.reducer
-
 
 
 export const incValuesTC = () => (dispatch: Dispatch, getState: () => RootState) => {
@@ -78,11 +77,34 @@ export const incValuesTC = () => (dispatch: Dispatch, getState: () => RootState)
 
 export const setValueFromLocalStorageTC = () => (dispatch: Dispatch) => {
     let valueAsString = localStorage.getItem('counterValue')
-    if(valueAsString) {
+    if (valueAsString) {
         let newValue = JSON.parse(valueAsString)
-        dispatch(setValueLC(newValue))
+        dispatch(setValueLS(newValue))
     }
+}
 
+
+export const settingsValuesTC = () => (dispatch: Dispatch, getState: () => RootState) => {
+
+    let currentMaxValue = getState().counter.maxValue
+    let currentMinValue = getState().counter.startValue
+
+    localStorage.setItem('settingsValues', JSON.stringify({
+        max: currentMaxValue,
+        min: currentMinValue
+    }))
+
+    dispatch(set())
+}
+
+export const settingsValueFromLocalStorageTC = () => (dispatch: Dispatch) => {
+    let valueAsString = localStorage.getItem('settingsValues')
+    if (valueAsString) {
+        let newValue = JSON.parse(valueAsString)
+
+        dispatch(start(newValue.min))
+        dispatch(max(newValue.max))
+    }
 }
 
 
